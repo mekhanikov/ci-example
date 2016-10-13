@@ -1,0 +1,12 @@
+version: '2'
+
+services:
+  jenkins:
+    restart: always
+    image: jenkins2
+    volumes_from: 
+     - container:jenkins-data
+    ports:
+     - "8080:8080"
+     - "50000:50000"
+   
