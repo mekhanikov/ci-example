@@ -3,7 +3,9 @@ version: '2'
 services:
   jenkins:
     restart: always
-    image: jenkins2
+    build:
+       context: ./
+       dockerfile: Dockerfile
     volumes_from: 
      - container:jenkins-data
     ports:

@@ -9,4 +9,11 @@ ENV JAVA_OPTS="-Xmx8192m"
 #COPY plugins.txt /usr/share/jenkins/plugins.txt
 #RUN cat /usr/share/jenkins/plugins.txt
 #RUN /usr/local/bin/plugins.sh /usr/share/jenkins/plugins.txt
-RUN /usr/local/bin/install-plugins.sh docker-slaves github-branch-source:1.8 maven-plugin:2.7.1 job-dsl:1.51 docker-plugin:0.16.2
+RUN /usr/local/bin/install-plugins.sh \
+ docker-slaves \
+ github-branch-source:1.8 \
+ maven-plugin:2.7.1 \
+ job-dsl:1.51 \
+ docker-plugin:0.16.2 \
+ git:3.0.0 \
+ gitlab-plugin:1.4.2
