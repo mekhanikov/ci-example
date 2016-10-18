@@ -57,4 +57,5 @@ https://github.com/sameersbn/docker-gitlab
 wget https://raw.githubusercontent.com/sameersbn/docker-gitlab/master/docker-compose.yml
 docker-compose up
 
-
+docker rm $(docker ps -a -q)
+docker rmi $(docker images -q)

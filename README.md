@@ -10,3 +10,8 @@ curl --header "PRIVATE-TOKEN: JthbngmugHPoVzXkGUv3" -X POST "http://127.0.0.1:10
 
 Jenkins - gitlab integraion: 
 https://docs.gitlab.com/ee/integration/jenkins.html
+
+Generate GitLab tocken.
+Jenkins -> settings, gitlab: 
+http://ciinfraexaple_gitlab_1:80
+add creds GitLab Token

@@ -149,13 +149,24 @@ services:
     - OAUTH_AZURE_API_SECRET=
     - OAUTH_AZURE_TENANT_ID=
 
+#  jenkins-data:
+#    restart: always
+#    build:
+#       context: ./jenkins2-docker
+#       dockerfile: Dockerfile-dataaa
+#
+
   jenkins:
     restart: always
     build:
        context: ./jenkins2-docker
        dockerfile: Dockerfile
-    volumes_from:
-     - container:jenkins-data
+#    volumes:
+#    - /var/jenkins_home
+#    volumes_from:
+#     - container:jenkins-dataaaa
     ports:
      - "8080:8080"
      - "50000:50000"
+#    depends_on:
+#    - jenkins-data
