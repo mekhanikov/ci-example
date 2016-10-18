@@ -154,8 +154,8 @@ services:
     build:
        context: ./jenkins2-docker
        dockerfile: Dockerfile
-    volumes_from:
-     - container:jenkins-data
+    volumes:
+     - /var/jenkins_home
     ports:
      - "8080:8080"
      - "50000:50000"

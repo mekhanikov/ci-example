@@ -4,11 +4,14 @@ services:
   jenkins:
     restart: always
     build:
-       context: ./
+       context: .
        dockerfile: Dockerfile
-    volumes_from: 
-     - container:jenkins-data
+    volumes:
+    - /var/jenkins_home
+#    volumes_from:
+#     - container:jenkins-dataaaa
     ports:
      - "8080:8080"
      - "50000:50000"
-   
+#    depends_on:
+#    - jenkins-data
