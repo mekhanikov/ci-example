@@ -10,14 +10,17 @@ ARG group=jenkins
 ARG uid=1000
 ARG gid=1000
 
-COPY config.xml /var/jenkins_home/config.xml
-RUN chmod 600 /var/jenkins_home/config.xml
-RUN chown root:root /var/jenkins_home/config.xml
+#COPY config.xml /var/jenkins_home/config.xml
+#RUN chmod 600 /var/jenkins_home/config.xml
+#RUN chown root:root /var/jenkins_home/config.xml
+
 # Jenkins is run with user `jenkins`, uid = 1000
 # If you bind mount a volume from the host or a data container,
 # ensure you use the same uid
 RUN groupadd -g ${gid} ${group} \
     && useradd -d "$JENKINS_HOME" -u ${uid} -g ${gid} -m -s /bin/bash ${user}
+
+RUN chown jenkins:jenkins /var/jenkins_home
 
 ## Jenkins home directory is a volume, so configuration and build history
 ## can be persisted and survive image upgrades
@@ -104,11 +107,14 @@ RUN /usr/local/bin/install-plugins.sh \
  docker-plugin:0.16.2 \
  git:3.0.0 \
  gitlab-plugin:1.4.2
-COPY config.xml /usr/share/jenkins/ref/config.xml.override
-COPY config.xml /usr/share/jenkins/ref/config.xml
+#COPY config.xml /usr/share/jenkins/ref/config.xml.override
+#COPY config.xml /usr/share/jenkins/ref/config.xml
+USER root
 COPY id_rsa /var/jenkins_home/.ssh/id_rsa
-
+RUN whoami
+RUN chown jenkins:jenkins /var/jenkins_home/.ssh
+RUN chown jenkins:jenkins /var/jenkins_home/.ssh/id_rsa
 #VOLUME /var/jenkins_home
 #RUN rm -rf /var/jenkins_home/secrets/initialAdminPassword
-
+USER jenkins
 ENTRYPOINT ["/bin/tini", "--", "/usr/local/bin/jenkins.sh"]
